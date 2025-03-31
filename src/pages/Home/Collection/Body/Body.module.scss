@@ -77,4 +77,5 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    @include adaptiv-font(24, 16);
 }

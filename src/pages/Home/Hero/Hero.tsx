@@ -79,6 +79,11 @@ const Hero = () => {
                         </div>
                         <div className="hero__ad-line">
                             <p className="hero__adtext">Сотрудничайте</p>
+                            <img
+                                src={plus}
+                                alt="Decorate plus in circle"
+                                className="hero__adplus"
+                            />
                         </div>
                     </div>
                 </li>
