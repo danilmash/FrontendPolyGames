@@ -19,7 +19,14 @@ const Header: React.FC<HeaderProps> = ({ openMenu, showHeader }) => {
         >
             <div className={styles.header__wrapper}>
                 <div className={styles.header__details}>
-                    <div className={styles.logos}>
+                <div className={styles.logos}>
+                        <Link to="/" className={styles.header__link}>
+                            <img
+                                src={polyLogo}
+                                alt="PolyGames Logo Image"
+                                className={styles.header__logo}
+                            />
+                        </Link>
                         <Link to="/" className={styles.header__link}>
                             <img
                                 src={logo}
