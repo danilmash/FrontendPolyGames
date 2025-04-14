@@ -1,9 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import styles from './Game.module.scss'
 import GameCard from './components/GameCard/GameCard'
 import GameDescription from './components/GameDescription/GameDescription'
 import ReviewsList from './components/ReviewsList/ReviewsList'
-import styles from './Game.module.scss'
 
 type GameParams = {
     id: string
