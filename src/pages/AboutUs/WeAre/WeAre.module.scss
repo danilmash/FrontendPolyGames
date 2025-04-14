@@ -1,12 +1,23 @@
+@import '@/variables.scss';
 .we-are {
-    margin-top: 50px;
+    margin-top: 20px;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr  1fr;
     height: 625px;
+    grid-template-areas:
+            "text text"
+            "left right";
+    @media (min-width: 800px) {
+        margin-top: 100px;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-areas: "left text right";
+    };
+    
     &__left-side-images {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        grid-area: left;
     }
     &__top-left-image {
         position: relative;
@@ -18,33 +29,42 @@
     }
     &__bottom-left-image {
         position: relative;
+        top: 20%;
         left: 8%;
         width: 60%;
     }
     &__text {
-        font-size: 24px;
+        @include adaptiv-font(24,16);
         line-height: 34.68px;
-        align-self: center;
-        text-align: center;
         width: 90%;
-        margin-inline: auto;
+        grid-area: text;
+        max-height: 160px;
+        @media (min-width: 800px) {
+            max-height: 212px;
+            align-self: center;
+            text-align: center;
+            margin-inline: auto;
+        };
     }
     &__right-side-images {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        grid-area: right;
     }
     &__top-right-image {
         position: relative;
         top: 8%;
-        left: 20px;
+        left: 12%;
         transform: rotate(4deg);
         width: 60%;
         border-radius: 20%;
     }
     &__bottom-right-image {
         position: relative;
-        top: 170px;
-        right: 70px;
+        top: 12%;
+        right: 12%;
+        transform: rotate(4deg);
+        width: 90%;
     }
 }
