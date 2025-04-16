@@ -17,7 +17,6 @@ import Game from '../pages/Game/Game'
 import AboutUs from '../pages/AboutUs/AboutUs'
 
 const App = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [showHeader, setShowHeader] = useState(true)
     const [lastScrollY, setLastScrollY] = useState(0)
 
@@ -57,40 +56,25 @@ const App = () => {
         }
     }, [])
 
-    const openMenu = () => {
-        setIsMenuOpen(true)
-    }
-
-    const closeMenu = () => {
-        setIsMenuOpen(false)
-    }
-
     return (
         <div className="app">
-            {isMenuOpen && <div className="jumbo jumbo--dark"></div>}
             <BrowserRouter>
-                <div className={isMenuOpen ? 'screen screen--left' : 'screen'}>
-                    <Header openMenu={openMenu} showHeader={showHeader} />
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/games" element={<Catalog />} />
-                        <Route path="/teams" element={<TeamsPage />} />
-                        <Route path="/auth" element={<Auth />} />
-                        <Route path="/register" element={<Registration />} />
-                        <Route path="/post-form" element={<PostForm />} />
-                        <Route path="/about-us" element={<AboutUs />} />
-                        <Route
-                            path="/popular-games"
-                            element={<PopularGames />}
-                        />
-                        <Route path="/games/:id" element={<Game />} />
-                        {/* 404 */}
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                    <Footer />
-                </div>
-                <MenuWindow isOpen={isMenuOpen} closeMenu={closeMenu} />
+                <Header showHeader={showHeader} />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/games" element={<Catalog />} />
+                    <Route path="/teams" element={<TeamsPage />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/register" element={<Registration />} />
+                    <Route path="/post-form" element={<PostForm />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/popular-games" element={<PopularGames />} />
+                    <Route path="/games/:id" element={<Game />} />
+
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Footer />
             </BrowserRouter>
         </div>
     )
