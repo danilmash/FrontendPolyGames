@@ -13,7 +13,8 @@ const Preview = () => {
                     className={styles['preview__logo']}
                 />
                 <p className={styles['preview__text']}>
-                    PolyGames- уникальная платформа для игроков и разработчиков.
+                    PolyGames - уникальная платформа для игроков и
+                    разработчиков.
                 </p>
             </div>
             <img

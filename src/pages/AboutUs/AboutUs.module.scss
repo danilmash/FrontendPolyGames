@@ -1,7 +1,10 @@
 .about-us__wrapper {
-    max-width: 1440px;
+    max-width: 1500px;
     margin: 0 auto;
-    padding: 60px 50px;
+    padding: 40px 18px;
     background-repeat: no-repeat;
     background-position-y: 200px;
+    @media (min-width: 1150px) {
+        padding: 50px;
+    }
 }

@@ -1,12 +1,16 @@
+@import '@/variables.scss';
 .for-developers {
     max-width: 1011px;
-    padding-inline: 50px;
     margin-inline: auto;
-    margin-top: 100px;
-    margin-bottom: 200px;
+    margin-top: 60px;
+    margin-bottom: 75px;
+    @media (min-width: 800px) {
+        padding-inline: 50px;
+        margin-top: 100px;
+        margin-bottom: 200px;
+    }
     &__title {
-        text-align: center;
-        font-size: 100px;
+        @include adaptiv-font(100, 24);
         font-style: normal;
         font-weight: 500;
         background: linear-gradient(
@@ -22,10 +26,16 @@
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        @media (min-width: 800px) {
+            text-align: center;
+        }
     }
     &__text {
-        font-size: 38px;
-        text-align: center;
-        margin-top: 40px;
+        @include adaptiv-font(38, 16);
+        margin-top: 20px;
+        @media (min-width: 800px) {
+            margin-top: 40px;
+            text-align: center;
+        }
     }
 }
