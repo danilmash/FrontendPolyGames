@@ -34,13 +34,7 @@ const GameDescription: React.FC = () => {
                         src={pict2}
                         alt=""
                     />
-                    <div
-                        className={
-                            styles[
-                                'description__text description__text--second'
-                            ]
-                        }
-                    >
+                    <div className={styles['description__text']}>
                         Есть над чем задуматься: базовые сценарии поведения
                         пользователей набирают популярность среди определенных
                         слоев населения, а значит, должны быть превращены в
@@ -49,22 +43,13 @@ const GameDescription: React.FC = () => {
                         диаграммы связей, вне зависимости от их уровня, должны
                         быть подвергнуты целой серии независимых исследований.
                     </div>
-                    <div
-                        className={
-                            styles[
-                                'description__text description__text--second'
-                            ]
-                        }
-                    >
+                    <div className={styles['description__text']}>
                         <span
-                            className={
-                                styles[
-                                    'description__title description__title--seconary'
-                                ]
-                            }
+                            className={styles['description__title--secondary']}
                         >
                             Рекомендуемые системные требования
                         </span>
+
                         <ul className={styles['description__list']}>
                             <li>ОС: Windows 7, 8, 8.1, 10, 11</li>
                             <li>Процессор: 2.4 GHz</li>

@@ -1,19 +1,40 @@
-@import '../../Game.module';
-
+@import '@/variables.scss';
 .card {
-    margin-bottom: 100px;
-    padding: 40px;
+    margin-bottom: 50px;
+    padding: 15px 10px ;
     background-color: var(--background-detailed);
-    border-radius: 42px;
+    border-radius: 15px;
+    @media (min-width: 800px) {
+        margin-bottom: 100px;
+        padding: 15px 10px ;
+        border-radius: 42px;
+        padding: 40px;
+    }
 
     &__block {
-        display: grid;
-        grid-template-columns: 1.2fr 1fr;
-        gap: 40px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 30px;
+        @media (min-width: 1200px) {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+        }
     }
 
     &__header {
-        font-size: 96px;
-        margin-left: 0;
+        @include adaptiv-font(96, 40);
+        margin-left: 5px;
+        margin-bottom: 15px;
+        background: linear-gradient(
+            94deg,
+            #FF5731,
+            #9960FF,
+            #9960FF,
+        );
+        -webkit-background-clip: text; /* Для WebKit-браузеров */
+        -webkit-text-fill-color: transparent; /* Делаем сам текст прозрачным */
+        background-clip: text; /* На всякий случай */
+        color: transparent;
     }
 }
