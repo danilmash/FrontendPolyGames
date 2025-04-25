@@ -5,52 +5,104 @@ import google from '../../shared/assets/google-icon.svg'
 import vk from '../../shared/assets/vk-icon.svg'
 import AuthFormInput from '../Auth/AuthFormInput/AuthFormInput'
 import { Link } from 'react-router-dom'
+import { z } from 'zod'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../../shared/lib/store/store'
+import { registerUser } from '../../shared/lib/store/auth/authSlice'
+
+const userFormDataScheme = z.object({
+    email: z.string().email('Введите корректный email'),
+    password: z.string().min(8, 'Пароль должен содержать минимум 8 символов'),
+    passwordRepeat: z.string(),
+}).refine(data => data.password === data.passwordRepeat, {
+    message: 'Пароли не совпадают',
+    path: ['passwordRepeat'],
+})
+
+type FormData = z.infer<typeof userFormDataScheme>;
+type FormDataKeys = keyof FormData;
 
 function Registration() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordRepeat, setPasswordRepeat] = useState('')
 
-    const handleEmailChange = (newEmailValue: string) => {
-        setEmail(newEmailValue)
-        console.log(newEmailValue)
+    const [userFormData, setUserFormData] = useState<FormData>({
+        email: '',
+        password: '',
+        passwordRepeat: '',
+    })
+    const [hasValidationErrors, setHasValidationErrors] = useState(false)
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    const handleInputChange = (field: FormDataKeys) => {
+        return function handleField(value: string) {
+            userFormData[field] = value
+        }
     }
 
-    const handlePasswordChange = (newPasswordValue: string) => {
-        setPassword(newPasswordValue)
+    const validate = () => {
+        const result = userFormDataScheme.safeParse(userFormData)
+        if (result.success) {
+            return undefined
+        }
+        return result.error.format()
     }
 
-    const handlePasswordRepeatChange = (passwordRepeatValue: string) => {
-        setPasswordRepeat(passwordRepeatValue)
+    const sendForm = () => {
+        const errors = validate()
+        if (errors) {
+            setHasValidationErrors(true)
+            return
+        }
+
+        dispatch(registerUser({
+            email: userFormData.email,
+            password: userFormData.password
+        }))
     }
 
-    const sendForm = () => {}
+    const errors = hasValidationErrors ? validate() : undefined
 
     return (
         <main className={styles['registration__wrapper']}>
             <h1 className={styles['registration__title']}>Регистрация в PolyGames</h1>
-            <form className={styles['registration__form']} method="POST">
+            <form className={styles['registration__form']}>
                 <div className={styles['registration__form-main']}>
                     <div className={styles['input__fields-block']}>
-                        <AuthFormInput
-                            onInputChange={handleEmailChange}
-                            title="Email пользователя"
-                            type="email"
-                        />
-                        <AuthFormInput
-                            onInputChange={handlePasswordChange}
-                            title="Пароль"
-                            type="password"
-                        />
-                        <AuthFormInput
-                            onInputChange={handlePasswordRepeatChange}
-                            title="Подтверждение пароля"
-                            type="password"
-                            name="password-repeat"
-                        />
+                        <div className={styles['form-input-block']}>
+                            <AuthFormInput
+                                onInputChange={handleInputChange('email' as FormDataKeys)}
+                                title="Email пользователя"
+                                type="email"
+                            />
+                            {errors?.email &&
+                                <div className={styles['error-text']}>{errors?.email?._errors[0]}</div>
+                            }
+                        </div>
+                        <div className={styles['form-input-block']}>
+                            <AuthFormInput
+                                onInputChange={handleInputChange('password' as FormDataKeys)}
+                                title="Пароль"
+                                type="password"
+                            />
+                            {errors?.password &&
+                                <div className={styles['error-text']}>{errors?.password?._errors[0]}</div>
+                            }
+                        </div>
+                        <div className={styles['form-input-block']}>
+                            <AuthFormInput
+                                onInputChange={handleInputChange('passwordRepeat' as FormDataKeys)}
+                                title="Подтверждение пароля"
+                                type="password"
+                                name="password-repeat"
+                            />
+                            {errors?.passwordRepeat &&
+                                <div className={styles['error-text']}>{errors?.passwordRepeat?._errors[0]}</div>
+                            }
+                        </div>
                         <div className={styles['registration__btns']}>
                             <button
                                 className={styles['registration__btn']}
+                                type="button"
                                 onClick={() => sendForm()}
                             >
                                 <p>Зарегистрироваться</p>
@@ -80,21 +132,21 @@ function Registration() {
                         <a href="#">
                             <img
                                 src={vk}
-                                alt=""
+                                alt="Вконтакте"
                                 className={styles['aside-settings__icon']}
                             />
                         </a>
                         <a href="#">
                             <img
                                 src={google}
-                                alt=""
+                                alt="Google"
                                 className={styles['aside-settings__icon']}
                             />
                         </a>
                         <a href="#">
                             <img
                                 src={git}
-                                alt=""
+                                alt="GitHub"
                                 className={styles['aside-settings__icon']}
                             />
                         </a>
