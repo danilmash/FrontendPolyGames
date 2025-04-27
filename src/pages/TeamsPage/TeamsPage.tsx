@@ -3,6 +3,7 @@ import styles from './TeamsPage.module.scss'
 import popular_teams from '../../shared/assets/popular-teams.png'
 import team from '../../shared/assets/team.png'
 import person from '../../shared/assets/Rectangle 56.png'
+import { ArrowLink } from '../../shared/ui/ArrowLink/ArrowLink'
 
 function TeamsPage() {
     const slider = useRef<HTMLDivElement | null>(null)
@@ -83,24 +84,7 @@ function TeamsPage() {
                         <h1>Будьте первыми!</h1>
                     </div>
                 </div>
-                <div className={styles['registration__btn']}>
-                    <div className={styles['btn__circle']}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="15"
-                            height="14"
-                            viewBox="0 0 15 14"
-                            fill="none"
-                            className="btn__arrow"
-                        >
-                            <path
-                                d="M14.3334 7.58336C14.6555 7.26118 14.6555 6.73882 14.3334 6.41664L9.0831 1.16637C8.76091 0.844186 8.23855 0.844186 7.91637 1.16637C7.59419 1.48855 7.59419 2.01091 7.91637 2.3331L12.5833 7L7.91637 11.6669C7.59419 11.9891 7.59419 12.5114 7.91637 12.8336C8.23855 13.1558 8.76091 13.1558 9.0831 12.8336L14.3334 7.58336ZM0.25 7.825H13.75V6.175H0.25V7.825Z"
-                                fill="black"
-                            />
-                        </svg>
-                    </div>
-                    <p className={styles['describe__p']}>Подробнее</p>
-                </div>
+                <ArrowLink to="/" className={styles['arrow-link']} />
             </div>
         </main>
     )
