@@ -25,18 +25,37 @@ export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async (
         credentials: { email: string; password: string },
-        { rejectWithValue }
+        { rejectWithValue },
     ) => {
         try {
             const response = await axios.post(
                 'https://locallhost:5000/login',
-                credentials
+                credentials,
             )
             return response.data
         } catch (error: any) {
             return rejectWithValue(error.response.data)
         }
-    }
+    },
+)
+
+export const registerUser = createAsyncThunk(
+    'auth/registerUser',
+    async (
+        credentials: { email: string; password: string },
+        { rejectWithValue },
+    ) => {
+        try {
+            const response: {token: string} = (await axios.post(
+                'https://locallhost:5000/api/users/register',
+                credentials,
+            )).data
+            localStorage.setItem('authToken', response.token)
+            return response
+        } catch (error: any) {
+            return rejectWithValue(error.response.data)
+        }
+    },
 )
 
 const authSlice = createSlice({
@@ -58,19 +77,38 @@ const authSlice = createSlice({
                 loginUser.fulfilled,
                 (
                     state,
-                    action: PayloadAction<{ user: User; token: string }>
+                    action: PayloadAction<any>,
                 ) => {
                     state.loading = false
                     state.user = action.payload.user
                     state.token = action.payload.token
-                }
+                },
             )
             .addCase(
                 loginUser.rejected,
                 (state, action: PayloadAction<any>) => {
                     state.loading = false
                     state.error = action.payload || 'Login failed'
-                }
+                },
+            )
+            .addCase(
+                registerUser.pending, (state: AuthState) => {
+                    state.loading = true
+                    state.error = null
+                },
+            )
+            .addCase(
+                registerUser.fulfilled, (state: AuthState, action: PayloadAction<any>) => {
+                    state.loading = false
+                    state.user = action.payload.user
+                    state.error = null
+                },
+            )
+            .addCase(
+                registerUser.rejected, (state: AuthState, action: PayloadAction<any>) => {
+                    state.loading = false
+                    state.error = action.payload || 'Register failed'
+                },
             )
     },
 })

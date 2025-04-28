@@ -1,25 +1,25 @@
 import React, { FC, useState } from 'react'
 import styles from './AuthFormInput.module.scss'
 
-interface EmailInputProps {
-    onInputChange: (email: string) => void
+interface InputProps {
+    onInputChange: (value: string) => void
     title: string
     type: string
     name?: string
 }
 
-const AuthFormInput: FC<EmailInputProps> = ({
+const AuthFormInput: FC<InputProps> = ({
     onInputChange,
     title,
     type,
     name,
 }) => {
-    const [email, setEmail] = useState('')
+    const [value, setValue] = useState('')
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newEmail = e.target.value
-        setEmail(newEmail)
-        onInputChange(newEmail)
+        const newValue = e.target.value
+        setValue(newValue)
+        onInputChange(newValue)
     }
 
     return (
@@ -32,7 +32,7 @@ const AuthFormInput: FC<EmailInputProps> = ({
                 name={name || type}
                 className={styles['input-block__input']}
                 placeholder={title}
-                value={email}
+                value={value}
                 onChange={handleInputChange}
             />
         </div>
