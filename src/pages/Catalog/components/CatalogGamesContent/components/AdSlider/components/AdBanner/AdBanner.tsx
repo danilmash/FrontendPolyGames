@@ -3,8 +3,6 @@ import styles from './AdBanner.module.scss'
 import { Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import TeamDisplay from './components/TeamDisplay/TeamDisplay'
-import TeamDisplaySkeleton from '../../../skeletons/SkeletonTeamDisplay/SkeletonTeamDisplay'
 import type { Game } from '../../../../types'
 
 type AdBannerProps = {
@@ -19,12 +17,6 @@ const AdBanner: React.FC<AdBannerProps> = ({ gameAdObj }) => {
                     alt={gameAdObj.name}
                     className={styles['ad-banner__image']}
                 />
-            )}
-
-            {gameAdObj.devTeamId ? (
-                <TeamDisplay devTeamId={gameAdObj.devTeamId} />
-            ) : (
-                <TeamDisplaySkeleton />
             )}
 
             <div className={styles['ad-banner__info']}>

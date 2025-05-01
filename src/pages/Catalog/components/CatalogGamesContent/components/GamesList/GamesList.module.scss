@@ -1,10 +1,12 @@
 @import '@/variables.scss';
 
 .games__list {
-    margin-top: 3rem;
     display: flex;
     flex-direction: column;
+    width: 100%;
     transition: all 0.5s ease;
+    padding: 0 30px;
+    box-sizing: border-box;
 }
 
 .list__head {
@@ -12,25 +14,25 @@
     align-items: center;
     flex: 1;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 .list__body {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 19px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
     flex-wrap: wrap;
     list-style: none;
-    margin-top: 1rem;
 }
 
 .games__header {
-    font-size: 2rem;
+    @include adaptiv-font(38,16);
 }
 
 .games__show {
     text-decoration: none;
     color: var(--text-secondary);
-    font-size: 1.2rem;
+    @include adaptiv-font(24,14);
     font-weight: 600;
     transition: 0.3s;
 
@@ -39,18 +41,14 @@
     }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 768px) {
     .list__body {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        grid-template-columns: repeat(4, 1fr);
     }
+}
 
-    .games__header {
-        font-size: 1.2rem;
-        width: 13rem;
-    }
-
-    .games__show {
-        font-size: 1rem;
+@media screen and (min-width: 1150px) {
+    .list__body {
+        grid-template-columns: repeat(6, 1fr);
     }
 }

@@ -1,27 +1,53 @@
 @import '@/variables.scss';
 
 .ads-slider {
-    display: grid !important;
-    grid-template-columns: 1fr 352px;
-    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 40px;
+    max-height: 940px;
 }
+
+.ads-slider__list-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
 
 .ads-slider__list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     list-style: none;
     justify-content: flex-start;
-    gap: 4%;
+    overflow: auto;
+    list-style: none;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
 }
 
-@media screen and (max-width: 576px) {
-    .ads-slider {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-    }
 
+.ads-slider__item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+  
+@media screen and (min-width: 768px) {
+    .ads-slider {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        justify-items: center;
+        gap: 0px;
+    }
     .ads-slider__list {
-        gap: 30px;
+        flex-direction: column;
+        scroll-snap-type: y mandatory;
+        overflow: visible;     
     }
 }

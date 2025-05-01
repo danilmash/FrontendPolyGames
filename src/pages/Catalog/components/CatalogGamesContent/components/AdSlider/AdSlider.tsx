@@ -14,16 +14,18 @@ export default function AdSlider({ games }: AdSliderProps) {
             {games.length > 0 /* Если есть игры по запросу */ ? (
                 <>
                     <AdBanner gameAdObj={games[0]} />
-                    <ul className={styles['ads-slider__list']}>
-                        {games.slice(1).map((game) => (
-                            <li
-                                className={styles['ads-slider__item']}
-                                key={game.id}
-                            >
-                                <AdBand gameAdObj={game} />
-                            </li>
-                        ))}
-                    </ul>
+                    <div className={styles['ads-slider__list-wrapper']}>
+                        <ul className={styles['ads-slider__list']}>
+                            {games.slice(1).map((game) => (
+                                <li
+                                    className={styles['ads-slider__item']}
+                                    key={game.id}
+                                >
+                                    <AdBand gameAdObj={game} />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </>
             ) : (
                 /* Если нет игр по запросу. Рендерим сообщение в AdBanner, и скелеты в AdBand*/
