@@ -1,0 +1,34 @@
+@import '@/variables.scss';
+
+.games{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 100px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    @include adaptiv-font(38,14);
+    font-weight: 500;
+  }
+
+  &__btn{
+    @include adaptiv-font(24,12);
+    background-color: initial;
+    border: none;
+    color: #949494;
+  }
+
+  &__cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    @media (min-width: 1150px) {
+      gap: 24px;
+    }
+  }
+}

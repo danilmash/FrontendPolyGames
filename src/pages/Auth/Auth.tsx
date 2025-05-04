@@ -8,12 +8,15 @@ import vk from '../../shared/assets/vk-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../shared/lib/store/store'
 import { loginUser } from '../../shared/lib/store/auth/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch<AppDispatch>()
     const { loading, error } = useSelector((state: RootState) => state.auth)
+
+    const navigate = useNavigate()
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -43,7 +46,7 @@ function Auth() {
                 <div className={styles['auth__forget__btns']}>
                     <div className={styles['auth__btn']}>
                         <p>Войти</p>
-                        <div className={styles['btn__circle']}>
+                        <button onClick={()=>{navigate("/profile")}} className={styles['btn__circle']}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="15"
@@ -57,7 +60,7 @@ function Auth() {
                                     fill="black" // var(--primary-color)
                                 />
                             </svg>
-                        </div>
+                        </button>
                     </div>
                     <p>Забыли пароль?</p>
                 </div>
