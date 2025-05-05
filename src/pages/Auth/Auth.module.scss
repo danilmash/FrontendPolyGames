@@ -27,7 +27,8 @@
 }
 
 .btn__circle {
-    background-color: --primary-color;
+    border: none;
+    background-color: var(--primary-color);
     display: inline-flex;
     align-items: center;
     justify-content: center;

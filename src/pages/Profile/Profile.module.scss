@@ -1,0 +1,10 @@
+.profile__wrapper {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 15px;
+  background-repeat: no-repeat;
+  background-position-y: 200px;
+  @media (min-width: 1150px) {
+    padding: 50px;
+  }
+}

@@ -1,0 +1,48 @@
+@import '@/variables.scss';
+
+.card{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 100px;
+
+  @media (min-width: 1150px) {
+    gap: 28px;
+    max-width: 230px;
+  }
+
+  &__pic {
+    background:
+            linear-gradient(var(--background-secondary), var(--background-secondary)) padding-box,
+            linear-gradient(to right, #AD7EFF, #C29FFF, #FF9AF1, #E58EA7, #FF5731) border-box;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent; // Градиент проявится здесь
+    border-radius: 15px;
+
+
+    @media (min-width: 1150px) {
+      border-radius: 35px;
+      width: 227px;
+      height: 227px;
+    }
+  }
+
+  &__icon {
+    width: 50px;
+    height: 50px;
+
+    @media (min-width: 1150px) {
+      width: 99px;
+      height: 99px;
+    }
+  }
+
+  &__text {
+    @include adaptiv-font(24,14);
+    font-weight: 300;
+  }
+}
