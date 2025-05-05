@@ -31,11 +31,14 @@ function Registration() {
     })
     const [hasValidationErrors, setHasValidationErrors] = useState(false)
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch<AppDispatch>()
 
     const handleInputChange = (field: FormDataKeys) => {
         return function handleField(value: string) {
-            userFormData[field] = value
+            setUserFormData({
+                ...userFormData,
+                [field]: value,
+            })
         }
     }
 
@@ -56,7 +59,7 @@ function Registration() {
 
         dispatch(registerUser({
             email: userFormData.email,
-            password: userFormData.password
+            password: userFormData.password,
         }))
     }
 
