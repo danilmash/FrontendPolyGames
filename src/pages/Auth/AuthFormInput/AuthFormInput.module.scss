@@ -7,7 +7,7 @@
 
 .input-block__input {
     display: block;
-    padding: 24px 29px 22px;
+    padding: clamp(15px, 4vw, 20px) clamp(15px, 4vw, 30px);
     height: 60px;
     margin: auto;
     font-size: 20px;
@@ -20,6 +20,7 @@
     box-sizing: border-box;
     transition: all 0.15s ease;
     outline: 1px solid transparent;
+    line-height: 100%;
     &:focus {
         outline: 1px solid $white-300;
     }
@@ -33,4 +34,6 @@
     margin-left: 15px;
     text-align: left;
     margin-bottom: 10px;
+    font-weight: 600;
+    @include adaptiv-font(28, 16);
 }

@@ -1,18 +1,45 @@
 @import '../../variables';
-.auth__form {
-    text-align: center;
-    background-color: var(--background-detailed);
-    width: 900px;
-    margin: 1% auto;
-    border-radius: 20px;
-    padding: 80px 0px 10px;
+
+.auth__wrapper {
+    padding: 0 15px;
+    padding-top: 100px;
+    padding-bottom: 108px;
 }
 
-.auth__forget__btns {
+.auth__form {
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--background-detailed);
+    max-width: 840px;
     margin: 40px auto;
-    margin-left: 12%;
+    border-radius: 20px;
+    padding: clamp(30px, 8vw, 100px) clamp(20px, 8vw, 110px) 40px;
+
+    .input__fields-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+        margin-bottom: 40px;
+
+        .form-input-block {
+            width: 100%;
+        }
+    }
+}
+.error-text {
+    margin-left: 10px;
+    text-align: start;
+    color: red;
+    margin-top: 10px;
+}
+.auth__btns {
+    margin-top: 10px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    @include adaptiv-font(24, 13);
 }
 
 .auth__btn {
@@ -20,14 +47,24 @@
     color: #ffffff;
     display: flex;
     align-items: center;
-    border: 2px solid --primary-color;
+    border: 2px solid var(--primary-color);
     border-radius: 25px;
-    padding: 5px 7px;
-    margin-right: 20px;
+    padding: 5px 7px 5px 20px;
+    height: 50px;
+    cursor: pointer;
+
+    &:hover {
+        .btn__circle {
+            background-color: $white-100;
+
+            path {
+                fill: var(--primary-color);
+            }
+        }
+    }
 }
 
 .btn__circle {
-    border: none;
     background-color: var(--primary-color);
     display: inline-flex;
     align-items: center;
@@ -35,25 +72,30 @@
     border-radius: 100px;
     height: 30px;
     width: 30px;
-    margin-left: 10px;
-    transition: all 0.15s ease;
+    margin-left: 30px;
+    transition: all 0.3s ease;
     cursor: pointer;
-    &:hover {
-        background-color: $white-100;
-        & .last-update__arrow path {
-            fill: --primary-color;
-        }
+}
+.break-line {
+    margin-top: 40px;
+    width: calc(1.2 * clamp(20px, 8vw, 110px) + 100%);
+    margin-left: calc(clamp(20px, 8vw, 110px) * -0.6);
+    border-top: 1px solid #bbbbbb;
+}
+.other {
+    margin-top: clamp(20px, 4vw, 40px);
+    @include adaptiv-font(24, 13);
+    &__auth-btns {
+        margin-top: clamp(20px, 4vw, 40px);
+        text-align: left;
+        display: flex;
+        justify-content: center;
     }
-}
 
-.other__auth__btns {
-    padding: 30px 100px;
-    text-align: left;
-}
-
-.btns {
-    padding-top: 40px;
-    text-align: center;
+    &__auth-btn {
+        width: clamp(30px, 11.5%, 70px);
+        aspect-ratio: 1;
+    }
 }
 
 .auth_title {
@@ -68,23 +110,25 @@
     );
     color: transparent;
     background-clip: text;
-    width: max-content;
     margin: 0 auto;
 }
 
-.aside-settings__icon:not(:first-child) {
-    margin-left: 20px;
+img.aside-settings__icon {
+    margin-left: 0;
 }
 
 .link__registr {
     text-align: center;
-    margin: 50px 0px;
-}
+    margin: 40px 0 0;
 
-.link__registr p {
-    padding-top: 20px;
-}
+    h2 {
+        font-size: 32px;
+    }
 
-.link__registr h2 {
-    font-size: 32px;
+    p {
+        margin-top: 10px;
+        color: var(--text-primary);
+        font-size: 24px;
+        text-decoration: none;
+    }
 }
