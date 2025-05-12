@@ -9,9 +9,7 @@ function Catalog() {
         <CatalogFiltersProvider>
             <SkeletonTheme baseColor="#e3e3e1" highlightColor="#fff">
                 <main className={styles['catalog']}>
-                    <div className={styles['catalog__wrapper']}>
-                        <CatalogGamesContent />
-                    </div>
+                    <CatalogGamesContent />
                 </main>
             </SkeletonTheme>
         </CatalogFiltersProvider>
