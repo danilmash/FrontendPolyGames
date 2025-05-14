@@ -33,13 +33,13 @@ export const loginUser = createAsyncThunk(
                     token: string
                 }
             } = await axios.post(
-                'https://cors-anywhere.herokuapp.com/https://polygames-backend.onrender.com/api/users/login/',
+                'https://polygames-backend.onrender.com/api/users/login/',
                 credentials,
-                {
+               /*  {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
                     },
-                }
+                } */
             )
             localStorage.setItem('authToken', response.data.token)
             return response.data
@@ -58,13 +58,13 @@ export const registerUser = createAsyncThunk(
         try {
             const response: { token: string } = (
                 await axios.post(
-                    'https://cors-anywhere.herokuapp.com/https://polygames-backend.onrender.com/api/users/register/',
+                    'https://polygames-backend.onrender.com/api/users/register/',
                     credentials,
-                    {
+                  /*   {
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest',
                         },
-                    }
+                    } */
                 )
             ).data
             localStorage.setItem('authToken', response.token)

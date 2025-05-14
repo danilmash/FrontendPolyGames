@@ -43,14 +43,8 @@ function PostForm() {
 
         try {
             axios.post(
-                `https://cors-anywhere.herokuapp.com/` +
-                    'https://polygames-backend.onrender.com/api/games/',
-                data,
-                {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                }
+                'https://polygames-backend.onrender.com/api/games/',
+                data
             )
         } catch (error) {
             console.error('Ошибка при загрузке игры:', error)
