@@ -33,7 +33,7 @@ export const loginUser = createAsyncThunk(
                     token: string
                 }
             } = await axios.post(
-                'http://localhost:8000/api/users/login/',
+                'https://polygames-backend.onrender.com/api/users/login/',
                 credentials
             )
             localStorage.setItem('authToken', response.data.token)
@@ -53,7 +53,7 @@ export const registerUser = createAsyncThunk(
         try {
             const response: { token: string } = (
                 await axios.post(
-                    'http://localhost:8000/api/users/register',
+                    'https://polygames-backend.onrender.com/api/users/register',
                     credentials
                 )
             ).data

@@ -5,6 +5,7 @@ import SkeletonSlider from './components/skeletons/SkeletonSlider/SkeletonSlider
 import SkeletonGamesList from './components/skeletons/SkeletonGamesList/SkeletonGamesList'
 import AdSlider from './components/AdSlider/AdSlider'
 import type { Game, GamesListData } from './types'
+import axios from 'axios'
 
 function CatalogGamesContent() {
     const { selectedGenre, selectedSet, isLoading, changeLoadingState } =
@@ -13,25 +14,17 @@ function CatalogGamesContent() {
     const [gamesList, setGamesList] = useState<GamesListData[]>([])
     const [adSliderGames, setAdSliderGames] = useState<Game[]>([])
 
-    const getAPIUrl = (selectedGenre: string, selectedSet: string): string => {
-        let url = `http://localhost:3001/games/?`
-
-        if (selectedGenre && selectedGenre !== 'all') {
-            url += `&ganre=${selectedGenre}`
-        }
-
-        if (selectedSet && selectedSet !== 'all') {
-            url += `&set[0]=${selectedSet}`
-        }
+    const getAPIUrl = (): string => {
+        let url = `https://polygames-backend.onrender.com/api/games/`
 
         return url
     }
 
     /* Запрос для AdSlider --- 5 самых популярных по выбранным жанрам */
     const fetchAdSliderGames = async (url: string): Promise<void> => {
-        const response = await fetch(url + '&_sort=-rating&_limit=5')
+        const response = await fetch(url)
         const data: Game[] = await response.json()
-        setAdSliderGames(data)
+        setAdSliderGames(data.slice(0,4))
     }
 
     /* Запрос для GamesList */
@@ -82,15 +75,12 @@ function CatalogGamesContent() {
         const fetchData = async () => {
             try {
                 changeLoadingState(true)
-                const APIUrl = getAPIUrl(selectedGenre, selectedSet)
+                const APIUrl = getAPIUrl()
 
-                if (selectedGenre === 'all' && selectedSet === 'all') {
-                    await fetchAdSliderGames(APIUrl)
-                    await initialFetchGamesList(APIUrl)
-                } else {
+
                     await fetchAdSliderGames(APIUrl)
                     await fetchGamesList(APIUrl)
-                }
+        
             } catch (error) {
                 console.error('Error fetching data:', error)
             } finally {
