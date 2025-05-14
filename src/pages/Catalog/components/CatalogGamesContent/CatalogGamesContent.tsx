@@ -15,15 +15,20 @@ function CatalogGamesContent() {
     const [adSliderGames, setAdSliderGames] = useState<Game[]>([])
 
     const getAPIUrl = (): string => {
-        let url = `https://polygames-backend.onrender.com/api/games/`
+        let url = `https://cors-anywhere.herokuapp.com/`+`https://polygames-backend.onrender.com/api/games/`
 
+        
         return url
     }
 
     /* Запрос для AdSlider — 5 самых популярных по выбранным жанрам */
     const fetchAdSliderGames = async (url: string): Promise<void> => {
         try {
-            const response = await axios.get<Game[]>(url)
+            const response = await axios.get<Game[]>(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
             setAdSliderGames(response.data.slice(0, 4))
         } catch (error) {
             console.error('Ошибка при загрузке AdSlider игр:', error)
@@ -33,7 +38,11 @@ function CatalogGamesContent() {
     /* Запрос для GamesList */
     const fetchGamesList = async (url: string): Promise<void> => {
         try {
-            const response = await axios.get<Game[]>(url)
+            const response = await axios.get<Game[]>(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
 
             const formattedData: GamesListData = {
                 title: `Лучшие представители ${selectedGenre === 'all' ? 'всех жанров' : `жанра ${selectedGenre}`}${selectedSet === 'all' ? '' : `, набор ${selectedSet}`}`,
