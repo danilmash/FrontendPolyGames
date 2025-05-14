@@ -10,24 +10,29 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../shared/lib/store/store'
 import { registerUser } from '../../shared/lib/store/auth/authSlice'
 
-const userFormDataScheme = z.object({
-    email: z.string().email('Введите корректный email'),
-    password: z.string().min(8, 'Пароль должен содержать минимум 8 символов'),
-    passwordRepeat: z.string(),
-}).refine(data => data.password === data.passwordRepeat, {
-    message: 'Пароли не совпадают',
-    path: ['passwordRepeat'],
-})
+const userFormDataScheme = z
+    .object({
+        email: z.string().email('Введите корректный email'),
+        password: z
+            .string()
+            .min(8, 'Пароль должен содержать минимум 8 символов'),
+        passwordRepeat: z.string(),
+        username: z.string()
+    })
+    .refine((data) => data.password === data.passwordRepeat, {
+        message: 'Пароли не совпадают',
+        path: ['passwordRepeat'],
+    })
 
-type FormData = z.infer<typeof userFormDataScheme>;
-type FormDataKeys = keyof FormData;
+type FormData = z.infer<typeof userFormDataScheme>
+type FormDataKeys = keyof FormData
 
 function Registration() {
-
     const [userFormData, setUserFormData] = useState<FormData>({
         email: '',
         password: '',
         passwordRepeat: '',
+        username: ''
     })
     const [hasValidationErrors, setHasValidationErrors] = useState(false)
 
@@ -57,50 +62,81 @@ function Registration() {
             return
         }
 
-        dispatch(registerUser({
-            email: userFormData.email,
-            password: userFormData.password,
-        }))
+        dispatch(
+            registerUser({
+                username: userFormData.username,
+                email: userFormData.email,
+                password: userFormData.password,
+            })
+        )
     }
 
     const errors = hasValidationErrors ? validate() : undefined
 
     return (
         <main className={styles['registration__wrapper']}>
-            <h1 className={styles['registration__title']}>Регистрация в PolyGames</h1>
+            <h1 className={styles['registration__title']}>
+                Регистрация в PolyGames
+            </h1>
             <form className={styles['registration__form']}>
                 <div className={styles['registration__form-main']}>
                     <div className={styles['input__fields-block']}>
                         <div className={styles['form-input-block']}>
                             <AuthFormInput
-                                onInputChange={handleInputChange('email' as FormDataKeys)}
+                                onInputChange={handleInputChange(
+                                    'username' as FormDataKeys
+                                )}
+                                title="Имя пользователя"
+                                type="text"
+                            />
+                            {errors?.username && (
+                                <div className={styles['error-text']}>
+                                    {errors?.username?._errors[0]}
+                                </div>
+                            )}
+                        </div>
+                        <div className={styles['form-input-block']}>
+                            <AuthFormInput
+                                onInputChange={handleInputChange(
+                                    'email' as FormDataKeys
+                                )}
                                 title="Email пользователя"
                                 type="email"
                             />
-                            {errors?.email &&
-                                <div className={styles['error-text']}>{errors?.email?._errors[0]}</div>
-                            }
+                            {errors?.email && (
+                                <div className={styles['error-text']}>
+                                    {errors?.email?._errors[0]}
+                                </div>
+                            )}
                         </div>
                         <div className={styles['form-input-block']}>
                             <AuthFormInput
-                                onInputChange={handleInputChange('password' as FormDataKeys)}
+                                onInputChange={handleInputChange(
+                                    'password' as FormDataKeys
+                                )}
                                 title="Пароль"
                                 type="password"
                             />
-                            {errors?.password &&
-                                <div className={styles['error-text']}>{errors?.password?._errors[0]}</div>
-                            }
+                            {errors?.password && (
+                                <div className={styles['error-text']}>
+                                    {errors?.password?._errors[0]}
+                                </div>
+                            )}
                         </div>
                         <div className={styles['form-input-block']}>
                             <AuthFormInput
-                                onInputChange={handleInputChange('passwordRepeat' as FormDataKeys)}
+                                onInputChange={handleInputChange(
+                                    'passwordRepeat' as FormDataKeys
+                                )}
                                 title="Подтверждение пароля"
                                 type="password"
                                 name="password-repeat"
                             />
-                            {errors?.passwordRepeat &&
-                                <div className={styles['error-text']}>{errors?.passwordRepeat?._errors[0]}</div>
-                            }
+                            {errors?.passwordRepeat && (
+                                <div className={styles['error-text']}>
+                                    {errors?.passwordRepeat?._errors[0]}
+                                </div>
+                            )}
                         </div>
                         <div className={styles['registration__btns']}>
                             <button
