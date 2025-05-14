@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from 'react'
 import styles from './PostForm.module.scss'
 import { Sidebar } from './AsideMenu/Sidebar'
 import { FileInputArea } from './components/FileInputArea'
+import axios from 'axios'
 
 interface Platforms {
     windows: boolean
@@ -29,10 +30,31 @@ interface SidebarProps {
 }
 
 function PostForm() {
+    const handleSubmit = () => {
+        const data = {
+            name: title,
+            desc: description,
+            publish_date: Date.now(),
+            tags: tags.split(','),
+            platforms: getFormattedPlatforms(),
+        }
+
+        console.log(data)
+
+        try {
+            axios.post(
+                'https://polygames-backend.onrender.com/api/games/',
+                data
+            )
+        } catch (error) {
+            console.error('Ошибка при загрузке игры:', error)
+        }
+    }
+
     const sections = [
         { id: 1, name: 'Основная информация' },
         { id: 2, name: 'Изображения продукта' },
-        { id: 3, name: 'Файлы игры' },
+        /*  { id: 3, name: 'Файлы игры' }, */
     ]
     const [activeSectionId, setActiveSectionId] = useState<number>(1)
 
@@ -49,6 +71,17 @@ function PostForm() {
         linux: false,
     })
 
+    const getFormattedPlatforms = () => {
+        const map: { [key: string]: string } = {
+            windows: 'Windows',
+            macos: 'macOS',
+            linux: 'Linux',
+        }
+
+        return Object.entries(platforms)
+            .filter(([_, value]) => value)
+            .map(([key]) => map[key])
+    }
     const [requirements, setRequirements] = useState<SystemRequirements>({
         cpu: '',
         ram: '',
@@ -173,6 +206,7 @@ function PostForm() {
                                 className={styles['element__input']}
                                 type="text"
                                 id="keywords"
+                                autoComplete="off"
                             />
                         </div>
                         <div className={styles['post-form__element']}>
@@ -191,6 +225,7 @@ function PostForm() {
                                 className={styles['element__input']}
                                 type="text"
                                 id="tags"
+                                autoComplete="off"
                             />
                         </div>
                         <div className={styles['post-form__element']}>
@@ -649,7 +684,7 @@ function PostForm() {
                             />
                         </div>
                         <button
-                            onClick={() => handleProceed(3)}
+                            onClick={() => handleSubmit()}
                             className={styles['post-form__proceed']}
                         >
                             <div className={styles['btn__circle']}>
@@ -667,7 +702,7 @@ function PostForm() {
                                     />
                                 </svg>
                             </div>
-                            Продолжить
+                            Отправить
                         </button>
                     </div>
                 )

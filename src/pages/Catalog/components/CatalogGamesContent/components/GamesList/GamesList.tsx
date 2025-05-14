@@ -35,7 +35,7 @@ function GamesList({ title, games }: GamesListProps) {
                             <GamesItem
                                 name={game.name}
                                 desc={game.desc}
-                                imageUrl={game.imageUrl}
+                                imageUrl={game.image}
                                 key={game.id}
                             />
                         ))}
