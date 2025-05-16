@@ -6,7 +6,7 @@ import vk from '../../shared/assets/vk-icon.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../shared/lib/store/store'
 import { loginUser } from '../../shared/lib/store/auth/authSlice'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AuthFormInput from '../Auth/AuthFormInput/AuthFormInput'
 import { z } from 'zod'
 
@@ -148,7 +148,7 @@ function Auth() {
             </form>
             <div className={styles['link__registr']}>
                 <h2>В первый раз в PolyGames?</h2>
-                <p>Создать аккаунт</p>
+                <Link className={styles['resgiterLink']} to={'/register'}>Создать аккаунт</Link>
             </div>
         </main>
     )

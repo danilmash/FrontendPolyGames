@@ -193,9 +193,9 @@ function Registration() {
                 </div>
             </form>
             <div className={styles['to-register-block']}>
-                <h2>В первый раз в PolyGames?</h2>
+                <h2>Уже есть аккаунт?</h2>
                 <Link to="/auth" className={styles['to-register-block__link']}>
-                    Создать аккаунт
+                    Войти в аккаунт
                 </Link>
             </div>
         </main>

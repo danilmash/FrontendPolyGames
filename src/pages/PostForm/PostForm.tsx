@@ -621,6 +621,24 @@ function PostForm() {
                     <div className={styles['post-form__section']}>
                         <div className={styles['post-form__element']}>
                             <h2 className={styles['element__header']}>
+                                Файлы игры
+                            </h2>
+                            <p className={styles['element__desc']}>
+                                Загрузите архив с файлами вашей игры, включая
+                                исполняемый файл (.exe) и все необходимые
+                                ресурсы. Поддерживаемые форматы: .zip, .rar,
+                                .7z.
+                            </p>
+                            <FileInputArea
+                                onChangeFileInput={handleFileInputChange(
+                                    setIconFile
+                                )}
+                                small={true}
+                            />
+                        </div>
+
+                        <div className={styles['post-form__element']}>
+                            <h2 className={styles['element__header']}>
                                 Иконка
                             </h2>
                             <p className={styles['element__desc']}>

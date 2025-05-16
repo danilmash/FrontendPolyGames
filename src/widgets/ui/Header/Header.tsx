@@ -50,9 +50,15 @@ const Header: React.FC<HeaderProps> = ({ showHeader }) => {
                     <Link className={styles.header__nav__link} to="/about-us">
                         О нас
                     </Link>
-                    <Link className={styles.header__nav__link} to="/auth">
-                        Личный кабинет
-                    </Link>
+                    {localStorage.getItem('authToken') ? (
+                        <Link className={styles.header__nav__link} to="/profile">
+                            Личный кабинет
+                        </Link>
+                    ) : (
+                        <Link className={styles.header__nav__link} to="/auth">
+                            Войти
+                        </Link>
+                    )}
                 </div>
                 <div className={styles['header__burger']} onClick={toggleMenu}>
                     <svg
