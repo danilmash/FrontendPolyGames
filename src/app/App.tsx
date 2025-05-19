@@ -15,6 +15,7 @@ import Footer from '@components/../widgets/ui/Footer/Footer'
 import NotFound from '../pages/NotFound/NotFound'
 import Game from '../pages/Game/Game'
 import AboutUs from '../pages/AboutUs/AboutUs'
+import { StudyProgram } from '../pages/StudyProgram/StudyProgram'
 
 const App = () => {
     const [showHeader, setShowHeader] = useState(true)
@@ -71,6 +72,7 @@ const App = () => {
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="/popular-games" element={<PopularGames />} />
                     <Route path="/games/:id" element={<Game />} />
+                    <Route path="/study-program" element={<StudyProgram />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
